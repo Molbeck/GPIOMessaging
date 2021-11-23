@@ -1,6 +1,15 @@
+/* 
+  Copyright 2021
+  @Author Christopher Mølbeck Sørensen
+
+  You may not use this file except in compliance with the License.
+  Unless required by applicable law or agreed to in writing, software distributed under the License 
+  is distrubuted on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*/
+
 import serialization
 
-/**
+/* 
 Small class containing properties regarding setting a specific value for a specific GPIO pin.
 If the property resetTime is set to anything else than null, the original value should be changed
   back after the reset time has been hit.
@@ -20,6 +29,10 @@ class GpioTriggerMessage:
   static is_map_valid map/Map -> bool:
     return map.contains "pin" and map.contains "value"
 
+/*
+  A custom serializer, serializing a GpioTriggerMessage into a Map, and the other way around.
+  Useful as ubjson is not supporting serialization of custom objects (yet), but it supports Maps
+*/
 class GpioTriggerMessageSerializer:
 
   /// Serializes the given $message.
