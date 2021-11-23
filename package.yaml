@@ -1,1 +1,4 @@
-# Toit Package File.
+dependencies:
+  gpio_messaging:
+    url: github.com/Molbeck/GPIOMessaging
+    version: ^1.0.0

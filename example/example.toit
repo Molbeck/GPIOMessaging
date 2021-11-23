@@ -1,18 +1,16 @@
-// using GPiOMessaging
-// main:
-//   message / GPIOTriggerMessage := GPIOTriggerMessage "abc" 123
-//   isValid := GPIOTriggerMessageValidator.IsObjectValid --input = message
-//   print "Is this message valid? $isValid"
-//   gpioTriggerSerializer := GPIOTriggerMessageSerializer
+import gpio_messaging
+import serialization
 
-//   serialized := gpioTriggerSerializer.Serialize --input = message
-//   print  "Serialized through custom serializer: $serialized"
-//   binary := serialization.serialize serialized
-//   print "Serialized custom map to binary: $binary"
-//   deserializedBinary := serialization.deserialize binary 
-//   print "Deserialized binary: $deserializedBinary"
-//   deserialized := gpioTriggerSerializer.Deserialize --input= deserializedBinary
-//   isValid = deserialized is GPIOTriggerMessage
-//   print "Deserialized through custom serializer: Is correct type: $isValid"
-//   isValid = GPIOTriggerMessageValidator.IsObjectValid --input = deserialized
-//   print "Is deserialized valid: $isValid"
+main:
+  message / gpio_messaging.GpioTriggerMessage  := gpio_messaging.GpioTriggerMessage "abc" 123
+  gpioTriggerSerializer := gpio_messaging.GpioTriggerMessageSerializer
+
+  serialized := gpioTriggerSerializer.serialize message
+  print  "Serialized through custom serializer: $serialized"
+  binary := serialization.serialize serialized
+  print "Serialized custom map to binary: $binary"
+  deserializedBinary := serialization.deserialize binary 
+  print "Deserialized binary: $deserializedBinary"
+  deserialized := gpioTriggerSerializer.deserialize deserializedBinary
+  isValid := deserialized is gpio_messaging.GpioTriggerMessage
+  print "Deserialized through custom serializer: Is correct type: $isValid"
