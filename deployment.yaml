@@ -1,0 +1,5 @@
+# name: GPIOMessaging
+# entrypoint: src/GPIOMessaging.toit
+# triggers:
+#   on_install: true
+#   on_interval: 30s
