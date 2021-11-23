@@ -47,5 +47,11 @@ class GpioTriggerMessageSerializer:
     return result
 
   /// Deserializes the given $map to a $GpioTriggerMessage.
-  deserialize map/Map -> GpioTriggerMessage:
+  deserialize_map map/Map -> GpioTriggerMessage:
     return GpioTriggerMessage.from_map map
+  
+  deserialize_bytearray bytearray /ByteArray -> GpioTriggerMessage:
+    deserialized := serialization.deserialize bytearray
+    if not deserialized is Map : throw "ARGUMENT ERROR"
+    if not GpioTriggerMessage.is_map_valid deserialized : throw "ARGUMENT ERROR"
+    return GpioTriggerMessage.from_map deserialized
