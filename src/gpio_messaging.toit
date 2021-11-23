@@ -8,6 +8,7 @@
 */
 
 import serialization
+import encoding.json
 
 /* 
 Small class containing properties regarding setting a specific value for a specific GPIO pin.
@@ -47,5 +48,17 @@ class GpioTriggerMessageSerializer:
     return result
 
   /// Deserializes the given $map to a $GpioTriggerMessage.
-  deserialize map/Map -> GpioTriggerMessage:
+  deserialize_map map/Map -> GpioTriggerMessage:
     return GpioTriggerMessage.from_map map
+
+  deserialize_bytearray bytes/ByteArray -> GpioTriggerMessage:
+    deserialized := json.decode bytes
+    if deserialized is not Map: throw "ARGUMENT ERROR"
+    if not GpioTriggerMessage.is_map_valid deserialized : throw "ARGUMENT ERROR"
+    return GpioTriggerMessage.from_map deserialized
+  
+  deserialize_bytearray_obsolete bytearray /ByteArray -> GpioTriggerMessage:
+    deserialized := serialization.deserialize bytearray
+    if not deserialized is Map : throw "ARGUMENT ERROR"
+    if not GpioTriggerMessage.is_map_valid deserialized : throw "ARGUMENT ERROR"
+    return GpioTriggerMessage.from_map deserialized

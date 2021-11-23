@@ -1,5 +1,0 @@
-prefixes:
-  gpio_messaging: ..
-packages:
-  ..:
-    path: ..
