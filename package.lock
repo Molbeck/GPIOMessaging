@@ -3,5 +3,5 @@ prefixes:
 packages:
   GPIOMessaging:
     url: github.com/Molbeck/GPIOMessaging
-    version: 1.0.3
+    version: 1.1.0
     hash: 73e7e011470a89841ac637f6b7aef6237bb581c9
